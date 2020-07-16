@@ -6,14 +6,16 @@
 [![License](https://img.shields.io/npm/l/ghcli.svg)](https://github.com/makisu/ghcli/blob/master/package.json)
 
 <!-- toc -->
-* [ghcli](#ghcli)
-* [Usage](#usage)
-* [Commands](#commands)
+
+- [ghcli](#ghcli)
+- [Usage](#usage)
+- [Commands](#commands)
 <!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
+
 ```sh-session
 $ npm install -g ghcli
 $ ghcli COMMAND
@@ -25,14 +27,16 @@ USAGE
   $ ghcli COMMAND
 ...
 ```
+
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-* [`ghcli help [COMMAND]`](#ghcli-help-command)
-* [`ghcli label-merge`](#ghcli-label-merge)
-* [`ghcli pr-merge [FILE]`](#ghcli-pr-merge-file)
+
+- [`ghcli help [COMMAND]`](#ghcli-help-command)
+- [`ghcli label-merge`](#ghcli-label-merge)
+- [`ghcli pr-merge [FILE]`](#ghcli-pr-merge-file)
 
 ## `ghcli help [COMMAND]`
 
@@ -53,7 +57,7 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0
 
 ## `ghcli label-merge`
 
-finds all open PRs tagged with label {X} on a repo and merge them into branch {Y}
+finds all open PRs tagged with label {X} on a repo and merge them into branch {Y}. Will display if there are any merge conflicts.
 
 ```
 USAGE
@@ -67,19 +71,19 @@ OPTIONS
 
 _See code: [src/commands/label-merge.ts](https://github.com/makisu/ghcli/blob/v0.0.0/src/commands/label-merge.ts)_
 
-## `ghcli pr-merge [FILE]`
+## `ghcli pr-merge`
 
-describe the command here
+🖇 Create a PR that merges branch Y into branch {Z}. Will display a confirmation prompt and merge conflicts.
 
 ```
 USAGE
-  $ ghcli pr-merge [FILE]
+  $ ghcli pr-merge
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -b, --branch=branch  (required) target branch
+  -h, --help           show CLI help
 ```
 
 _See code: [src/commands/pr-merge.ts](https://github.com/makisu/ghcli/blob/v0.0.0/src/commands/pr-merge.ts)_
+
 <!-- commandsstop -->

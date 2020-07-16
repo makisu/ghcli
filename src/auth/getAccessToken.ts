@@ -72,8 +72,13 @@ export async function startAuthFlow() {
           method: "POST",
         }).then((r) => r.text());
 
-        const accessToken = resp.split("&")[0].split("=")[1];
-        config.set("accessToken", accessToken);
+        try {
+          const accessToken = resp.split("&")[0].split("=")[1];
+          config.set("accessToken", accessToken);
+          console.log("access token saved");
+        } catch (error) {
+          console.log("cannot get access token");
+        }
       } catch (error) {
         console.log(error);
       }

@@ -59,7 +59,10 @@ export async function listMergeConflicts(
       });
 
       const { data: prData } = data;
-      if (!prData.mergeable) {
+      // mergeable !== null
+      // means branch is still in the process of
+      // checking for base branch changes.
+      if (!prData.mergeable && prData.mergeable !== null) {
         hasMergeConflicts = true;
         console.log("Failed to merge");
         console.log(`${prData.head.label} -> ${prData.base.label}`);

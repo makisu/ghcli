@@ -38,7 +38,6 @@ async function merge(
         error.message ===
         "Base branch was modified. Review and try the merge again."
       ) {
-        console.log(prNum);
         await sleep(3000);
         await merge(octokit, owner, repo, prNum, base, label);
       }

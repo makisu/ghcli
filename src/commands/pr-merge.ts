@@ -16,6 +16,11 @@ export default class PrMerge extends Command {
       description: "target branch",
       required: true,
     }),
+    title: flags.string({
+      char: "t",
+      description: "title for pull request",
+      required: true,
+    }),
   };
 
   async run() {
@@ -59,7 +64,7 @@ export default class PrMerge extends Command {
       const data = await octokit.pulls.create({
         owner,
         repo,
-        title: `Merge ${recentBranch} to ${flags.branch}`,
+        title: flags.title.trim(),
         head: recentBranch as string,
         base: flags.branch.trim(),
       });

@@ -82,6 +82,7 @@ USAGE
 OPTIONS
   -b, --branch=branch  (required) target branch
   -h, --help           show CLI help
+  -t, --title=title    (required) title for pull request
 ```
 
 _See code: [src/commands/pr-merge.ts](https://github.com/makisu/ghcli/blob/v0.0.0/src/commands/pr-merge.ts)_

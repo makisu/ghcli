@@ -13,7 +13,10 @@ export async function getConfigAccessToken(): Promise<string> {
       process.exit(0);
     }
     remotes.forEach((el) => {
-      if (!el.refs.push.startsWith("https://github.com/")) {
+      if (
+        !el.refs.push.startsWith("https://github.com/") &&
+        !el.refs.push.startsWith("git@github.com:")
+      ) {
         console.log("remote must include github");
         process.exit(0);
       }

@@ -6,6 +6,46 @@ import { sleep } from "../utils/sleep";
 import { listMergeConflicts } from "../utils/listMergeConflicts";
 import { config } from "../config";
 
+async function merge(
+  // @ts-ignore
+  octokit,
+  owner: string,
+  repo: string,
+  prNum: number,
+  base: string,
+  label: string
+) {
+  try {
+    await octokit.pulls.merge({
+      owner,
+      repo,
+      pull_number: prNum,
+      base: base,
+    });
+
+    console.log(`Successfully merged: PR#${prNum}`);
+    config.set(`${owner}:${repo}:recent-branch`, base.trim());
+  } catch (error) {
+    const hasMergeConflicts = await listMergeConflicts(
+      octokit,
+      owner,
+      repo,
+      label
+    );
+
+    if (!hasMergeConflicts) {
+      if (
+        error.message ===
+        "Base branch was modified. Review and try the merge again."
+      ) {
+        await sleep(3000);
+        await merge(octokit, owner, repo, prNum, base, label);
+      }
+    }
+    // process.exit(0);
+  }
+}
+
 export default class LabelMerge extends Command {
   static description =
     "🔍 finds all open PRs tagged with label {X} on a repo and merge them into branch {Y}";
@@ -70,36 +110,24 @@ export default class LabelMerge extends Command {
               base: flags.branch,
             });
           } catch (error) {
-            console.log(error.message);
+            // console.log(error.message);
+
             process.exit(0);
           }
         });
+
         // merges them
         pullsWithLabels.map(async (el) => {
           // to avoid rate-limiting
           await sleep(3000);
-          try {
-            await octokit.pulls.merge({
-              owner,
-              repo,
-              pull_number: el.number,
-              base: flags.branch,
-            });
-            console.log(`Successfully merged: PR#${el.number}`);
-            config.set(`${owner}:${repo}:recent-branch`, flags.branch.trim());
-          } catch (error) {
-            const hasMergeConflicts = await listMergeConflicts(
-              octokit,
-              owner,
-              repo,
-              flags.label
-            );
-
-            if (!hasMergeConflicts) {
-              console.log(error.message);
-            }
-            // process.exit(0);
-          }
+          await merge(
+            octokit,
+            owner,
+            repo,
+            el.number,
+            flags.branch,
+            flags.label
+          );
         });
       } else {
         console.log("no open PRs with that label");

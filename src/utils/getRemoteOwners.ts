@@ -13,9 +13,6 @@ export async function getRemoteOwners() {
     const remote = newRemotes[0].refs.push;
 
     const parsedUrl = gh(remote);
-    console.log(parsedUrl);
-    console.log(parsedUrl.owner);
-    console.log(parsedUrl.name);
     return [parsedUrl.owner, parsedUrl.name];
   } else {
     console.log("remote must include github");

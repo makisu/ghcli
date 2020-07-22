@@ -3,7 +3,7 @@
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/ghcli.svg)](https://npmjs.org/package/ghcli)
 [![Downloads/week](https://img.shields.io/npm/dw/ghcli.svg)](https://npmjs.org/package/ghcli)
-[![License](https://img.shields.io/npm/l/ghcli.svg)](https://github.com/makisu/ghcli/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/ghcli.svg)](https://github.com/makisu/ghcli/blob/master/LICENSE.txt)
 
 <!-- toc -->
 

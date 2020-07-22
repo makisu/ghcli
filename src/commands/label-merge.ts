@@ -16,15 +16,37 @@ async function merge(
   label: string
 ) {
   try {
-    await octokit.pulls.merge({
+    const success = await octokit.pulls.merge({
       owner,
       repo,
       pull_number: prNum,
       base: base,
     });
 
-    console.log(`Successfully merged: PR#${prNum}`);
-    config.set(`${owner}:${repo}:recent-branch`, base.trim());
+    if (success.data.merged) {
+      await sleep(1500);
+
+      const prData = await octokit.pulls.get({
+        owner,
+        repo,
+        pull_number: prNum,
+      });
+
+      await sleep(1500);
+      try {
+        await octokit.git.deleteRef({
+          owner,
+          repo,
+          ref: `heads/${prData.data.head.ref}`,
+        });
+
+        console.log(`Successfully merged: PR#${prNum}`);
+        config.set(`${owner}:${repo}:recent-branch`, base.trim());
+        console.log(`Deleted branch ${prData.data.head.ref}`);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
   } catch (error) {
     const hasMergeConflicts = await listMergeConflicts(
       octokit,

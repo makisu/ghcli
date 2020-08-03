@@ -14,7 +14,7 @@ export async function startAuthFlow() {
   const clientID = "1e4c1065d5b720bb6838";
   // This value is safe to be embedded in version control
   // https://github.com/cli/cli/issues/1369
-  const clientSecret = "99fffdee5fb032855054f71e317661b553e8ae8e";
+  const clientSecret = "a1814c9fd3e864fb6c72063e37ee2dc3322615b4";
   const redirectUri = "http://127.0.0.1:6236/callback";
   const scope = "repo";
   const state = randomString();

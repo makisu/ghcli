@@ -88,9 +88,9 @@ export async function startAuthFlow() {
       );
       res.end();
 
+      server.close();
       req.connection.end();
       req.connection.destroy();
-      server.close();
     })
     .listen(6236, "127.0.0.1");
 }

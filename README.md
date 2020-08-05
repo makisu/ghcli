@@ -87,4 +87,19 @@ OPTIONS
 
 _See code: [src/commands/pr-merge.ts](https://github.com/makisu/ghcli/blob/v0.0.0/src/commands/pr-merge.ts)_
 
+## `ghcli remove-access-token`
+
+Removes access token.
+
+```
+USAGE
+  $ ghcli remove-access-token
+
+OPTIONS
+  -h, --help           show CLI help
+```
+
+_See code: [src/commands/remove-access-token.ts](https://github.com/makisu/ghcli/blob/v0.0.0/src/commands/remove-access-token.ts)_
+
+
 <!-- commandsstop -->

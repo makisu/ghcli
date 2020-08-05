@@ -1,6 +1,6 @@
 {
   "name": "ghcli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Makisu",
   "bin": {
     "ghcli": "./bin/run"
